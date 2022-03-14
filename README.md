@@ -15,7 +15,7 @@ https://github.com/joshoewahp/c3369-pipeline
 
 ### Recenter the phase
 
-Re-center the phase screen to the target position, mainly depend on https://casadocs.readthedocs.io/en/latest/api/tt/casatasks.manipulation.phaseshift.html
+Re-center the phase screen to the target position, mainly depend on https://casadocs.readthedocs.io/en/latest/api/tt/casatasks.manipulation.fixvis.html
 
 The recommend phase center format is _'J052348.6-712552.5'_ (the source name), but the format could be 
 * phasecenter = ‘J2000 19h53m50 40d06m00’
