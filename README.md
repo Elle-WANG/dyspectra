@@ -2,7 +2,7 @@
 
 make the dynamic spectrum from ASKAP visibilities 
 
-**reference**
+**Reference:**
 https://github.com/joshoewahp/c3369-pipeline
 
 
