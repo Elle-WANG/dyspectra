@@ -32,3 +32,13 @@ casa --log2term --nogui -c recenter_phase.py /import/data/scienceData_SB32235_NG
 ```
 The output vis file would save into the same folder of original ms file
 
+### Average baselines 
+
+CASA scripts. Average data over all baselines, with default uv range >200m. 
+
+Example:
+```
+casa --log2term --nogui -c avg_baseline.py /import/data/scienceData_SB32235_NGC6744.beam12_averaged_cal.J184536.94-645149.ms/
+```
+The output vis file would save into the same folder of original ms file
+
