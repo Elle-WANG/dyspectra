@@ -19,7 +19,6 @@ from casacore.tables import table
 from astropy.time import Time
 
 from matplotlib import pyplot as plt
-# from astropy.visualization import ZScaleInterval, ImageNormalize
 import matplotlib.dates as mdates
 
 
@@ -105,11 +104,10 @@ def plot_dyspec(poldata, times, freqs, pol, values):
     
     
     fig, ax = plt.subplots(figsize=(8, 6))
-    # norm = ImageNormalize(data, interval=ZScaleInterval(contrast=0.5))
     
     im = ax.imshow(data, origin='lower', 
                     extent=[tmin, tmax, fmin, fmax], 
-                    aspect='auto', cmap='inferno', #norm=norm, 
+                    aspect='auto', cmap='inferno', 
                     clim=(-values.clim*rms, values.clim*rms))
     
     cb = fig.colorbar(im, ax=ax, fraction=0.05, pad=0.02)
@@ -188,55 +186,6 @@ def colored(msg):
     return "\033[91m{}\033[0m".format(msg)
 
 
-
-
-
-
-
-# # read the table to get correlations (shape as time, frequency)
-# XX = t.getcol(columnname)[:, :, 0]
-# XY = t.getcol(columnname)[:, :, 1]
-# YX = t.getcol(columnname)[:, :, 2]
-# YY = t.getcol(columnname)[:, :, 3]
-
-
-# # flag 
-# vis_flag = t.getcol("FLAG")[:, :, 0]
-# XX = np.ma.masked_where(vis_flag, XX)
-
-# vis_flag = t.getcol("FLAG")[:, :, 3]
-# YY = np.ma.masked_where(vis_flag, YY)
-
-
-
-
-# # convert those correlation to stokes
-# # note we always assume roll aixs = -45 deg here
-# I = (XX + YY) / 2
-# Q = (XX - YY) / 2
-# U = - (XY + YX) / 2
-# V = 1j * (XY - YX) / 2
-
-
-# import matplotlib.pyplot as plt
-# from astropy.visualization import ZScaleInterval, ImageNormalize
-
-# rms = np.std(np.imag(I))
-# data = np.real(I).transpose()
-
-# data = np.abs(np.real(I).transpose()) > 3*rms
-
-# # rms level
-
-
-# fig, ax = plt.subplots(figsize=(8, 6))
-
-# norm = ImageNormalize(data, interval=ZScaleInterval(contrast=0.2))
-
-# im = ax.imshow(data, origin='lower', 
-#                # extent=[0, 1000, 756, 1088], 
-#                aspect='auto', cmap='Spectral_r', clim=(-rms, rms))
-# cb = fig.colorbar(im, ax=ax, fraction=0.05, pad=0.02)
 
 
 if __name__ == "__main__":
