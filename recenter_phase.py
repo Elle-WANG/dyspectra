@@ -20,6 +20,7 @@ def colored(msg):
     return "\033[91m{}\033[0m".format(msg)
 
 
+
 def formated(phasecen):
     '''formated the phase center - from Jxxxx+xxxx to standard CASA format
     '''
@@ -55,4 +56,5 @@ print(colored('Write rotated ms file to {}'.format(rotated_ms)))
 
 # rotate!
 fixvis(vis=msname, outputvis=rotated_ms, phasecenter=phase_coord)
+
 
