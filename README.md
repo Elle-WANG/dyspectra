@@ -53,6 +53,18 @@ Example:
 python calculate_QU.py -45
 ```
 
+## Output files
 
+1. `dyspec_times.pkl`: time series of the observation, unit of `seconds`. Can convert it to human readable format by 
+
+    ```python
+    import numpy as np
+    from astropy.time import Time
+    
+    times = np.load("dyspec_times.pkl", allow_pickle=True)
+    new_times = Time(times / 24 / 3600, format='mjd', scale='utc')
+    new_times.format = 'iso'
+    ```
+2. `dyspec_freqs.pkl`: frequency series of the observation, unit of `Hz`. 
 
 
