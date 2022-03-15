@@ -8,7 +8,11 @@ https://github.com/joshoewahp/c3369-pipeline
 ## Reuqirement
 
 * CASA 5.1.2
-* casacore
+* python-casacore
+* numpy
+* matplotlib
+* astropy
+* argparse
 
 ## Quick Usage
 
@@ -42,16 +46,24 @@ casa --log2term --nogui -c avg_baseline.py /import/data/scienceData_SB32235_NGC6
 ```
 The output vis file would save into the same folder of original ms file
 
-### QU calculation
 
-Linear polarization depends on the roll axis angle of the telescope, for ASKAP the most common roll axis = -45 deg, which means U is reversed compare to normal CASA calculation. 
+### Generate and plot dynamic spectrum
 
-This script will give you correct Q/U results based on the roll axis. 
+Python scripts. Generate several pickle file to save telescope correlation data and stokes data. Plot the dynamic spectrum for each stokes (I, Q, U, V). 
+
+Note the Q, U defination may be different from other conventions. The default setup is `pol_axis=-45`, check `QU calculation` for more details. 
 
 Example:
 ```
-python calculate_QU.py -45
+python make_stokes.py /import/data/scienceData_SB28280_EMU_1650-41.beam02_averaged_cal.J164622.64-440533.4.baseavg.ms/
 ```
+The default output files and plots are to save into current directory, you can specify it use `--outdir /import/new/folder/`
+
+To plot imagary part (the default is real part), specify `--imag`
+
+The scripts will automatically calculate the rms level (the standard deviation of imagary part), and plot the cmap in 1 sigma level. You can specify different rms level to generate the plot `--clim 0.2`
+
+
 
 ## Output files
 
@@ -66,5 +78,22 @@ python calculate_QU.py -45
     new_times.format = 'iso'
     ```
 2. `dyspec_freqs.pkl`: frequency series of the observation, unit of `Hz`. 
+
+
+
+
+## Other tools 
+
+### QU calculation
+
+Linear polarization depends on the roll axis angle of the telescope, for ASKAP the most common roll axis = -45 deg, which means U is reversed compare to normal CASA calculation. 
+
+This script will give you correct Q/U results based on the roll axis. 
+
+Example:
+```
+python calculate_QU.py -45
+```
+
 
 
