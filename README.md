@@ -42,3 +42,17 @@ casa --log2term --nogui -c avg_baseline.py /import/data/scienceData_SB32235_NGC6
 ```
 The output vis file would save into the same folder of original ms file
 
+### QU calculation
+
+Linear polarization depends on the roll axis angle of the telescope, for ASKAP the most common roll axis = -45 deg, which means U is reversed compare to normal CASA calculation. 
+
+This script will give you correct Q/U results based on the roll axis. 
+
+Example:
+```
+python calculate_QU.py -45
+```
+
+
+
+
