@@ -103,7 +103,7 @@ def plot_dyspec(poldata, times, freqs, pol, values):
     freqs = freqs / 1e6 # unit of MHz
     fmin, fmax = np.min(freqs), np.max(freqs)
     
-    plt.figure()
+    plt.figure(figsize=(8, 6))
     
     ax = plt.subplot()
     
