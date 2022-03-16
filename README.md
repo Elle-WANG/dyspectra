@@ -61,7 +61,7 @@ The default output files and plots are to save into current directory, you can s
 
 To plot imagary part (the default is real part), specify `--imag`
 
-The scripts will automatically calculate the rms level (the standard deviation of imagary part), and plot the cmap in 1 sigma level. You can specify different rms level to generate the plot `--clim 0.2`
+The scripts will automatically calculate the rms level (the standard deviation of imagary component), and plot the cmap in 1 sigma level. You can specify different rms level to generate the plot `--clim 0.2`
 
 
 
@@ -78,6 +78,9 @@ The scripts will automatically calculate the rms level (the standard deviation o
     new_times.format = 'iso'
     ```
 2. `dyspec_freqs.pkl`: frequency series of the observation, unit of `Hz`. 
+3. `dyspec_corr_XX.pkl`, `dyspec_corr_XY.pkl`, `dyspec_corr_YX.pkl`, `dyspec_corr_YY.pkl`: telescope correlation data, read from subtracted visibility
+4. `dyspec_stokes_I.pkl`, `dyspec_stokes_Q.pkl`, `dyspec_stokes_U.pkl`, `dyspec_stokes_V.pkl`: telescope stokes intensity, calculated from correlation data. Note the default roll axis is -45 deg for ASKAP, but it could be different from different observations. 
+5. `dyspec_plot_I.png`, `dyspec_plot_Q.png`, `dyspec_plot_U.png`, `dyspec_plot_V.png`: the dyname spectrum for each stokes
 
 
 
@@ -88,11 +91,14 @@ The scripts will automatically calculate the rms level (the standard deviation o
 
 Linear polarization depends on the roll axis angle of the telescope, for ASKAP the most common roll axis = -45 deg, which means U is reversed compare to normal CASA calculation. 
 
-This script will give you correct Q/U results based on the roll axis. 
+This script will give you correct Q/U results based on the roll axis. The roll axis for specific observation can be found in https://apps.atnf.csiro.au/OMP/
+* find the specific SBID
+* click the SBID and Parset
+* find `common.target.src%d.pol_axis = [pa_fixed, 0.0]` (that means pol_axis = 0.0 deg)
 
 Example:
 ```
-python calculate_QU.py -45
+python calculate_QU.py 0.0
 ```
 
 
