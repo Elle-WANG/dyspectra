@@ -21,6 +21,9 @@ from astropy.time import Time
 from matplotlib import pyplot as plt
 import matplotlib.dates as mdates
 
+import matplotlib
+matplotlib.use('Agg')
+
 
 
 def _main():
@@ -103,21 +106,20 @@ def plot_dyspec(poldata, times, freqs, pol, values):
     freqs = freqs / 1e6 # unit of MHz
     fmin, fmax = np.min(freqs), np.max(freqs)
     
-    plt.figure(figsize=(8, 6))
     
-    ax = plt.subplot()
+    fig, ax = plt.subplots(figsize=(8, 6))
     
     im = ax.imshow(data, origin='lower', 
                     extent=[tmin, tmax, fmin, fmax], 
                     aspect='auto', cmap='inferno', 
                     clim=(-values.clim*rms, values.clim*rms))
     
-    cb = plt.colorbar(im, ax=ax, fraction=0.05, pad=0.02)
+    cb = fig.colorbar(im, ax=ax, fraction=0.05, pad=0.02)
     
     date_form = mdates.DateFormatter("%Y-%b-%d/%H:%M")
     ax.xaxis.set_major_formatter(date_form)
     ax.xaxis.set_major_locator(mdates.HourLocator(interval=int(time_length/4)))
-    plt.gcf().autofmt_xdate(rotation=15)
+    fig.autofmt_xdate(rotation=15)
     
     ax.set_title('Stokes {}'.format(pol))
     ax.set_xlabel('Time (UTC)')
@@ -131,7 +133,6 @@ def plot_dyspec(poldata, times, freqs, pol, values):
         plt.show()
     else:
         plt.close()
-    
 
 
 
