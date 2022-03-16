@@ -47,7 +47,7 @@ Example:
 ```
 casa --log2term --nogui -c recenter_phase.py /import/data/scienceData_SB32235_NGC6744.beam12_averaged_cal.ms/ J184536.94-645149.55
 ```
-The output vis file would save into the same folder of original ms file
+The output vis file (with suffix of `.sourcename.ms`) would save into the same folder of original ms file
 
 ### Average baselines 
 
@@ -57,7 +57,7 @@ Example:
 ```
 casa --log2term --nogui -c avg_baseline.py /import/data/scienceData_SB32235_NGC6744.beam12_averaged_cal.J184536.94-645149.ms/
 ```
-The output vis file would save into the same folder of original ms file
+The output vis file (with suffix of `.baseavg.ms`) would save into the same folder of original ms file
 
 
 ### Generate and plot dynamic spectrum
