@@ -36,6 +36,7 @@ def _main():
     parser.add_argument('--noflag', action='store_true', help='Without flagging data')
     parser.add_argument('--imag', action='store_true', help='Plot imagary part')
     parser.add_argument('--clim', type=float, default=1.0, help='Cmap rms level')
+    parser.add_argument('--noshow', action='store_true', help='Do not show the plot')
 
     values = parser.parse_args()
     
@@ -124,7 +125,9 @@ def plot_dyspec(poldata, times, freqs, pol, values):
     
     savename = os.path.join(values.outdir, 'dyspec_plot_{}.png'.format(pol))
     plt.savefig(savename, dpi=300, bbox_inches='tight')
-    plt.show()
+    
+    if not values.noshow:
+        plt.show()
 
 
 
