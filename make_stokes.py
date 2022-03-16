@@ -128,6 +128,8 @@ def plot_dyspec(poldata, times, freqs, pol, values):
     
     if not values.noshow:
         plt.show()
+    else:
+        plt.close()
 
 
 
