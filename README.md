@@ -1,6 +1,6 @@
 # dyspectra
 
-make the dynamic spectrum from ASKAP visibilities 
+make the dynamic spectrum for interested target from model-subtracted ASKAP visibilities 
 
 **Reference:**
 https://github.com/joshoewahp/c3369-pipeline
