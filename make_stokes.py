@@ -21,7 +21,9 @@ from astropy.time import Time
 from matplotlib import pyplot as plt
 import matplotlib.dates as mdates
 
+import matplotlib
 matplotlib.use('Agg')
+
 
 def _main():
     parser = argparse.ArgumentParser(description='Get the stokes intensity, and plot', 
