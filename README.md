@@ -14,11 +14,24 @@ https://github.com/joshoewahp/c3369-pipeline
 * astropy
 * argparse
 
+## Install
+
+Add your public SSH keys into the github setting (your SSH key for a specific machine can be find:
+```
+more ~/.ssh/id_rsa.pub
+```
+Then simply clone the repo
+```
+git clone git@github.com:Elle-WANG/dyspectra.git
+```
+You can always use `git pull` to get up-to-date version. 
+
 ## Quick Usage
 
 Following the steps:
 1. re-center the phase to target position of the visibility file 
 2. Average the baseline (exclude short baseline to reduce RFI)
+3. Read the telescope correlation data, and calculate the stokes data (and plot)
 
 ### Recenter the phase
 
