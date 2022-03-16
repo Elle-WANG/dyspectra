@@ -76,6 +76,8 @@ To plot imagary part (the default is real part), specify `--imag`
 
 The scripts will automatically calculate the rms level (the standard deviation of imagary component), and plot the cmap in 1 sigma level. You can specify different rms level to generate the plot `--clim 0.2`
 
+The scripts will automatically show the figures during processing. You can use `--noshow` to drop them out. 
+
 
 
 ## Output files
