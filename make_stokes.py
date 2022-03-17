@@ -20,9 +20,7 @@ from astropy.time import Time
 
 from matplotlib import pyplot as plt
 import matplotlib.dates as mdates
-
 import matplotlib
-matplotlib.use('Agg')
 
 
 
@@ -42,6 +40,9 @@ def _main():
     parser.add_argument('--noshow', action='store_true', help='Do not show the plot')
 
     values = parser.parse_args()
+
+    if values.noshow:
+        matplotlib.use('Agg')
     
     
     # create saving directory
@@ -118,7 +119,11 @@ def plot_dyspec(poldata, times, freqs, pol, values):
     
     date_form = mdates.DateFormatter("%Y-%b-%d/%H:%M")
     ax.xaxis.set_major_formatter(date_form)
-    ax.xaxis.set_major_locator(mdates.HourLocator(interval=int(time_length/4)))
+
+    # set a reasonable time interval
+    if int(time_length/4) != 0:
+        ax.xaxis.set_major_locator(mdates.HourLocator(interval=int(time_length/4)))
+
     fig.autofmt_xdate(rotation=15)
     
     ax.set_title('Stokes {}'.format(pol))
