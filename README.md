@@ -7,7 +7,7 @@ https://github.com/joshoewahp/c3369-pipeline
 
 ## Reuqirement
 
-* CASA 5.1.2
+* CASA 6.1.0-118
 * python-casacore
 * numpy
 * matplotlib
