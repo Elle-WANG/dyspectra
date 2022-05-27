@@ -132,7 +132,7 @@ def plot_dyspec(poldata, times, freqs, pol, values):
     cb.set_label('Flux Density (mJy/beam)')
     
     savename = os.path.join(values.outdir, 'dyspec_plot_{}.png'.format(pol))
-    plt.savefig(savename, dpi=300, bbox_inches='tight')
+    fig.savefig(savename, dpi=300, bbox_inches='tight')
     
     if not values.noshow:
         plt.show()
