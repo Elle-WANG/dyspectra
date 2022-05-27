@@ -129,7 +129,7 @@ def plot_dyspec(poldata, times, freqs, pol, values):
     ax.set_title('Stokes {}'.format(pol))
     ax.set_xlabel('Time (UTC)')
     ax.set_ylabel('Frequency (MHz)')
-    cb.set_label('Flux Density (mJy)')
+    cb.set_label('Flux Density (mJy/beam)')
     
     savename = os.path.join(values.outdir, 'dyspec_plot_{}.png'.format(pol))
     plt.savefig(savename, dpi=300, bbox_inches='tight')
