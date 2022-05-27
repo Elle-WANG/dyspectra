@@ -60,7 +60,7 @@ def _main():
     print(colored('Get the antenna correlation, XX, XY, YX, YY...'))
     
     # get the stokes intensity 
-    I, Q, U, V = get_stokes(corr_list, values)
+    data = get_stokes(corr_list, values)
     print(colored('Get the full stokes I, Q, U, V... '))
     
     # get the time arrays
@@ -71,17 +71,21 @@ def _main():
     print(colored('Get time and frequency data array...'))
     
     # plot the figure
-    plot_dyspec(I, times, freqs, 'I', values)
-    plot_dyspec(Q, times, freqs, 'Q', values)
-    plot_dyspec(U, times, freqs, 'U', values)
-    plot_dyspec(V, times, freqs, 'V', values)
+    stokeslist = ['I', 'Q', 'U', 'V']
+    for i, pol in enumerate(stokeslist):
+        savename = os.path.join(values.outdir, 'dyspec_plot_{}.png'.format(pol))
+        plot_dyspec(data[i], times, freqs, pol, values, savename)
+        
+    # plot_dyspec(Q, times, freqs, 'Q', values)
+    # plot_dyspec(U, times, freqs, 'U', values)
+    # plot_dyspec(V, times, freqs, 'V', values)
     
     print(colored('Plot finished. '))
     
     
     
     
-def plot_dyspec(poldata, times, freqs, pol, values):
+def plot_dyspec(poldata, times, freqs, pol, values, savename):
     '''Plot 2D dynamic spectrum for specific stokes
     '''
     
@@ -131,7 +135,6 @@ def plot_dyspec(poldata, times, freqs, pol, values):
     ax.set_ylabel('Frequency (MHz)')
     cb.set_label('Flux Density (mJy/beam)')
     
-    savename = os.path.join(values.outdir, 'dyspec_plot_{}.png'.format(pol))
     fig.savefig(savename, dpi=300, bbox_inches='tight')
     
     if not values.noshow:
