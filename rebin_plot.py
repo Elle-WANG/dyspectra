@@ -32,9 +32,9 @@ def _main():
     #                     help='Input measurement set (baseline averaged)')
     parser.add_argument('--outdir', type=str, default='.', 
                         help='Specify the directory to save data and plots')
-    parser.add_argument('--base', type=str, help='Folder to store the XX, YY data')
+    parser.add_argument('--base', type=str, default='.', help='Folder to store the XX, YY data')
     parser.add_argument('--stokes', type=str, choices=['I', 'Q', 'U', 'V'], 
-                        help='which stokes to plot, I, Q, U, V')
+                        default='I', help='which stokes to plot, I, Q, U, V')
     parser.add_argument('--tbin', type=int, help='Number of folded bin in time axis')
     parser.add_argument('--fbin', type=int, help='Number of folded bin in freq axis')
     parser.add_argument('--noflag', action='store_true', help='Without flagging data')
