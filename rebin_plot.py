@@ -109,7 +109,7 @@ def plot_lightcurve(data, times, values, savename):
     times = Time(times / 24 / 3600, format='mjd', scale='utc')
     times.format = 'datetime64'
     
-    ax.plot(times.value, np.nanmean(data, axis=1), color='black')
+    ax.plot(times.value, np.nanmean(data, axis=1), color='black', marker='.', alpha=0.6)
     
     date_form = mdates.DateFormatter("%Y-%b-%d/%H:%M")
     ax.xaxis.set_major_formatter(date_form)
