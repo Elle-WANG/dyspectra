@@ -98,9 +98,26 @@ The scripts will automatically show the figures during processing. You can use `
 5. `dyspec_plot_I.png`, `dyspec_plot_Q.png`, `dyspec_plot_U.png`, `dyspec_plot_V.png`: the dyname spectrum for each stokes
 
 
-
-
 ## Other tools 
+
+### Rebin the dynamic spectrum
+
+Python scripts, to bin the dynamic spectrum for any time and frequency resolution. 
+
+Need the outputs from `make_stokes.py` scripts (e.g., `dyspec_stokes_I.pkl`, `dyspec_times.pkl`). 
+
+Example:
+```
+python rebin_plot.py --tbin 4 --fbin 4
+```
+The default base folder is the current directory, but you can specify it use `--base /import/data/J164622.64-440533.4/`. The default output folder is the current directory, but you can specify it use '--outdir' as well. 
+
+The `--tbin` and `--fbin` specified the number of bins you want to combined. 
+
+The scripts will automatically save the bined dynamic spectrum, the lightcurve, and the spectrum. 
+
+You can plot the dynamic spectrum from imagary part using `--imag`, but it can only plot real part for the lightcurve and spectrum. 
+
 
 ### QU calculation
 
@@ -115,6 +132,7 @@ Example:
 ```
 python calculate_QU.py 0.0
 ```
+
 
 
 
