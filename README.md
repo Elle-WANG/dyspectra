@@ -134,5 +134,7 @@ python calculate_QU.py 0.0
 ```
 
 
+### Waitlist
 
+1. Plot specific time range, e.g. --time "2019APR30:14:04:15,2019APR30:14:05:15"
 
