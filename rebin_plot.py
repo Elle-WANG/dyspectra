@@ -70,10 +70,13 @@ def _main():
     times = databin_1d(times, values.tbin)
     freqs = databin_1d(freqs, values.fbin)
     
-    # plot the data
+    # savename
     savename = 'plot_{}_tbin{}_fbin{}.png'.format(values.stokes, values.tbin, values.fbin)
+    if values.imag:
+        savename = savename[:-4] + "_imag" + savename[-4:]
+
+    # plot dynamic spectrum 
     make_stokes.plot_dyspec(data, times, freqs, values.stokes, values, 'dyspec_'+savename)
-    
     # plot lightcurve
     plot_lightcurve(np.real(data)*1e3, times, values, 'lc_'+savename)
     # plot spectrum
