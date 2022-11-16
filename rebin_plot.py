@@ -76,11 +76,11 @@ def _main():
         savename = savename[:-4] + "_imag" + savename[-4:]
 
     # plot dynamic spectrum 
-    make_stokes.plot_dyspec(data, times, freqs, values.stokes, values, 'dyspec_'+savename)
+    make_stokes.plot_dyspec(data, times, freqs, values.stokes, values, os.path.join(values.outdir, 'dyspec_'+savename))
     # plot lightcurve
-    plot_lightcurve(np.real(data)*1e3, times, values, 'lc_'+savename)
+    plot_lightcurve(np.real(data)*1e3, times, values, os.path.join(values.outdir, 'lc_'+savename))
     # plot spectrum
-    plot_spectrum(np.real(data)*1e3, freqs/1e6, values, 'sp_'+savename)
+    plot_spectrum(np.real(data)*1e3, freqs/1e6, values, os.path.join(values.outdir, 'sp_'+savename))
 
     print(colored('INFO: Plotting finished. '))
 
