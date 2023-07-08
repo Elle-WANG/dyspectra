@@ -7,8 +7,8 @@
 #SBATCH --job-name=vast
 #SBATCH --nodes=1
 #SBATCH --mem-per-cpu=30gb
-#SBATCH --output=/o9000/ASKAP/VAST/fast_test/dyspec_test/logfiles/run_dyspec_%A.output
-#SBATCH --error=/o9000/ASKAP/VAST/fast_test/dyspec_test/logfiles/run_dyspec_%A.error
+#SBATCH --output=/o9000/ASKAP/VAST/fast_survey/dyspec/logfiles/run_dyspec_%A.output
+#SBATCH --error=/o9000/ASKAP/VAST/fast_survey/dyspec/logfiles/run_dyspec_%A.error
 #SBATCH --export=all
 
 
@@ -25,22 +25,29 @@ SBID=$2
 FIELD=$3
 BEAM=$4
 
+path='/o9000/ASKAP/VAST/fast_survey'
+mspath=$path/$SBID/data
+logpath=$path/dyspec/logfiles
+
+msfile=$mspath/scienceData*"$SBID"*"$BEAM"*.ms.corrected
+
 echo $SOURCE, $SBID, $FIELD, $SBID
-echo /o9000/ASKAP/VAST/fast_test/$FIELD/corrected_data/scienceData_"$SBID"_"$FIELD"."$BEAM"_averaged_cal.ms
+echo $msfile
 echo $SLURM_JOBID
 echo 
 
 # start with refresh data
-rm -r /o9000/ASKAP/VAST/fast_test/$FIELD/corrected_data/scienceData_"$SBID"_"$FIELD"."$BEAM"_averaged_cal."$SOURCE".ms
+rm -r $mspath/scienceData*"$SBID"*"$BEAM"*"$SOURCE"*.ms.corrected
 
 # recenter the phase
-time casa --logfile /o9000/ASKAP/VAST/fast_test/dyspec_test/logfiles/casa_rephase_"$SLURM_JOBID"_"$SOURCE".log --nologger --nogui -c /home/ymwang/dyspectra/recenter_phase.py /o9000/ASKAP/VAST/fast_test/$FIELD/corrected_data/scienceData_"$SBID"_"$FIELD"."$BEAM"_averaged_cal.ms $SOURCE
+time casa --logfile $logpath/casa_rephase_"$SLURM_JOBID"_"$SOURCE".log --nologger --nogui -c /home/ymwang/dyspectra/recenter_phase.py $msfile $SOURCE
 
 # average baselines
-time casa --logfile /o9000/ASKAP/VAST/fast_test/dyspec_test/logfiles/casa_baseavg_"$SLURM_JOBID"_"$SOURCE".log --nologger --nogui -c /home/ymwang/dyspectra/avg_baseline.py /o9000/ASKAP/VAST/fast_test/$FIELD/corrected_data/scienceData_"$SBID"_"$FIELD"."$BEAM"_averaged_cal."$SOURCE".ms
+msnew=$mspath/scienceData*"$SBID"*"$BEAM"*"$SOURCE"*.ms.corrected
+time casa --logfile $logpath/casa_baseavg_"$SLURM_JOBID"_"$SOURCE".log --nologger --nogui -c /home/ymwang/dyspectra/avg_baseline.py $msnew
 
 # remove the middle files
-rm -r /o9000/ASKAP/VAST/fast_test/$FIELD/corrected_data/scienceData_"$SBID"_"$FIELD"."$BEAM"_averaged_cal."$SOURCE".ms
+rm -r $msnew
 
 
 # setting python environment
@@ -49,6 +56,7 @@ module load casacore/cpu-py3.6.5-3.1.0
 
 
 # generate the dynamic spectrum
-time python /home/ymwang/dyspectra/make_stokes.py /o9000/ASKAP/VAST/fast_test/$FIELD/corrected_data/scienceData_"$SBID"_"$FIELD"."$BEAM"_averaged_cal."$SOURCE".baseavg.ms --noshow --outdir "$SBID"_"$SOURCE" 
+msavg=$mspath/scienceData*"$SBID"*"$BEAM"*"$SOURCE".baseavg.ms.corrected
+time python /home/ymwang/dyspectra/make_stokes.py $msavg --noshow --outdir "$SBID"_"$SOURCE" 
 
 
