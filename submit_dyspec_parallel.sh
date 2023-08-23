@@ -59,6 +59,6 @@ module load casacore/cpu-py3.6.5-3.1.0
 
 # generate the dynamic spectrum
 msavg=$mspath/scienceData*"$SBID"*"$BEAM"*"$SOURCE".baseavg.ms.corrected
-time python /home/ymwang/dyspectra/make_stokes.py $msavg --noshow --outdir "$SBID"_"$SOURCE" 
+time python /home/ymwang/dyspectra/make_stokes.py $msavg --noshow --outdir "$SBID"_"$SOURCE"_"$BEAM" 
 
 
