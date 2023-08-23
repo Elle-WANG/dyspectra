@@ -2,9 +2,9 @@
 
 # test for dynamic spectra 
 
-#SBATCH --partition=all-x86-cpu
+#SBATCH --partition=purley-cpu
 #SBATCH --time=01:00:00
-#SBATCH --job-name=vast
+#SBATCH --job-name=DynamicSpectra
 #SBATCH --nodes=1
 #SBATCH --mem-per-cpu=30gb
 #SBATCH --output=/o9000/ASKAP/VAST/fast_survey/dyspec/logfiles/run_dyspec_%A.output
@@ -20,10 +20,12 @@ module load casa/5.0.0-218.el6
 
 # start data processing
 
+# sbatch ~/dyspectra/submit_dyspec_parallel.sh J083720.17-460248.44 SB45577 beam26
+
 SOURCE=$1
 SBID=$2
-FIELD=$3
-BEAM=$4
+#FIELD=$3
+BEAM=$3
 
 path='/o9000/ASKAP/VAST/fast_survey'
 mspath=$path/$SBID/data
@@ -31,7 +33,7 @@ logpath=$path/dyspec/logfiles
 
 msfile=$mspath/scienceData*"$SBID"*"$BEAM"*.ms.corrected
 
-echo $SOURCE, $SBID, $FIELD, $SBID
+echo $SOURCE, $SBID, $FIELD, $BEAM
 echo $msfile
 echo $SLURM_JOBID
 echo 
@@ -43,7 +45,7 @@ rm -r $mspath/scienceData*"$SBID"*"$BEAM"*"$SOURCE"*.ms.corrected
 time casa --logfile $logpath/casa_rephase_"$SLURM_JOBID"_"$SOURCE".log --nologger --nogui -c /home/ymwang/dyspectra/recenter_phase.py $msfile $SOURCE
 
 # average baselines
-msnew=$mspath/scienceData*"$SBID"*"$BEAM"*"$SOURCE"*.ms.corrected
+msnew=$mspath/scienceData*"$SBID"*"$BEAM"*"$SOURCE".ms.corrected
 time casa --logfile $logpath/casa_baseavg_"$SLURM_JOBID"_"$SOURCE".log --nologger --nogui -c /home/ymwang/dyspectra/avg_baseline.py $msnew
 
 # remove the middle files
