@@ -1,0 +1,5 @@
+python-casacore
+numpy
+matplotlib
+astropy
+argparse
