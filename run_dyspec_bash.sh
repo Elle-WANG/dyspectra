@@ -10,8 +10,8 @@ SBID=$2
 #FIELD=$3
 BEAM=$3
 
-path='/import/eve/fast_imaging'
-#path=`pwd`
+#path='/import/eve/fast_imaging'
+path=`pwd`
 mspath=$path/$SBID/data
 logpath=$path/dyspec/logfiles
 outpath=$path/dyspec
