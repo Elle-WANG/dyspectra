@@ -50,7 +50,7 @@ uvrange = '>200m'
 mstransform(
     vis=msname,
     outputvis=savename,
-    datacolumn="corrected",
+    datacolumn="all",
     uvrange=uvrange,
     timeaverage=True,
     timebin=timebin,

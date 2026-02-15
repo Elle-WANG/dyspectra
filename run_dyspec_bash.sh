@@ -22,7 +22,7 @@ affix=".ms.corrected"
 #affix=".ms"
 
 datacolumn="DATA"
-# datacolumn="CORRECTED_DATA"
+#datacolumn="CORRECTED_DATA"
 
 msfile=$mspath/scienceData*"$SBID"*"$BEAM"*"$affix"
 
@@ -50,4 +50,4 @@ rm -r $msnew
 msavg=$mspath/scienceData*"$SBID"*"$BEAM"*"$SOURCE".baseavg"$affix"
 time python $loc/make_stokes.py $msavg --noshow --outdir $outpath/"$SBID"_"$SOURCE"_"$BEAM" --columnname $datacolumn
 
-
+rm *.last
